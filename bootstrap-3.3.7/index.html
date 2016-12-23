@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Sample</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <form action="/addUser" method="POST">
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Jony"/>
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Washton"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password"/>
+      </div>
+      <div class="form-group">
+        <label for="profession">Profession:</label>
+        <input type="text" class="form-control" id="profession" name="profession" placeholder="profession"/>
+      </div>
+      <div class="form-group">
+        <label for="id">Id:</label>
+        <input type="text" class="form-control" id="id" name="id" placeholder="4" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+
+	  <form action="/file_upload" method="POST" enctype="multipart/form-data">
+			<div class="form-group">
+        <input type="file" id="image" name="image" size="50"/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Upload File</button>
+	  </form>
+  </body>
+</html>
