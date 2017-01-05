@@ -9,6 +9,8 @@ var request = require('request');
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
 
+var URLContext = 'http://172.16.51.196:8080/myapp/';
+
 app.use(express.static('bootstrap-3.3.7'));
 app.use(express.static('plan1'));
 app.use(bodyParser.urlencoded({ extended : false}));
@@ -19,30 +21,25 @@ console.log(users);
 
 app.get('/search', function(req, res) {
 	request({
-		uri: 'http://172.16.3.68:8080/myapp/myresource',
-		qs: {
-			api_key: '123456',
-			query: 'World of warcraft: Legion'
-		}
+		uri: URLContext + 'myresource'
 	}).pipe(res);
 });
 
 app.get('/users', function(req, res) {
-	request({uri: 'http://172.16.51.196:8080/myapp/smooth?id=' + req.query.id}).pipe(res);
+	request({uri: URLContext + 'smooth?id=' + req.query.id}).pipe(res);
 });
 
 app.get('/users/:username', function(req, res) {
+	console.log('users/'+ req.params.username); 
 	request({
-		uri: 'http://172.16.3.68:8080/myapp/users/' + req.params.username,
-		qs: {
-			api_key: '123456',
-			query: 'World of warcraft: Legion'
-		}
+		uri: URLContext + 'users/names/' + req.params.username
 	}).pipe(res);
 });
 
 app.get('/listUsers', function(req, res) {
-	res.end(JSON.stringify(users));	
+	request({
+		uri: URLContext + 'users/list/'
+	}).pipe(res);
 });
 
 app.get('/process', function(req, res) {
@@ -78,26 +75,12 @@ app.post("/addUser", function(req, res) {
 		profession : req.body.profession
 	};
 
-	request.post('http://172.16.51.196:8080/myapp/users',
+	request.post(URLContext + 'users',
 		{form: { name : req.body.first_name + " " + req.body.last_name,
 				password : req.body.password,
 				profession : req.body.profession
 				}
 		}).pipe(res);
-
-/*
-	var user = {
-		"user4" : {
-			"name" : req.body.first_name + " " + req.body.last_name,
-			"password" : req.body.password,
-			"profession" : req.body.profession,
-			"id" : req.body.id
-		}
-	};
-
-	users["user" + req.body.id] = user["user4"];
-	console.log(users);
-	res.end(JSON.stringify(users));*/
 });
 
 app.post('/process', urlencodedParser, function(req, res) {
